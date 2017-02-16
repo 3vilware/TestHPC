@@ -1,0 +1,11 @@
+#PBS -S /bin/bash
+#PBS -l walltime=00:10:00
+#PBS -N PI_parallel
+#PBS -j oe
+#PBS -o PI.out
+#PBS -l nodes=1:ppn=8
+set -x
+cd test_pbs
+mpicc -o pi.parallel monte-carlo-pi-mpi.c
+qstat -rn 
+mpirun -n 8 ./pi.parallel 10000000
